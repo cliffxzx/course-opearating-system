@@ -2,3 +2,4 @@
 bin
 release
 *_example.*
+.DS_Store

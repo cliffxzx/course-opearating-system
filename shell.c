@@ -32,6 +32,9 @@ void exec_command(char *args[]) {
   if (!strcmp(args[0], "exit")) {
     status = STOP;
     return;
+  } else if (!strcmp(args[0], "cd")) {
+    chdir(args[1]);
+    return;
   }
 
   pid_t pid = fork();
@@ -76,7 +79,7 @@ int main() {
   while (status & RUN) {
     fflush(stdout);
     dup2(stdio_temp[1], 1);
-    printf("$ ");
+    printf("%s $ ", getcwd(NULL, NULL));
 
     char line[MAX_LINE];
     fgets(line, MAX_LINE, stdin);
